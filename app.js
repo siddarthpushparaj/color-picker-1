@@ -9,8 +9,8 @@ sliders.forEach(slider => {
     slider.addEventListener('input', hslControls);
 });
 
-colorDivs.forEach((div, index) =>{
-    div.addEventListener('change', () =>{
+colorDivs.forEach((div, index) => {
+    div.addEventListener('change', () => {
         updateTextUI(index);
     });
 });
@@ -30,7 +30,7 @@ function randomColors() {
         div.style.backgroundColor = randomColor;
 
         // check contrast of hexTexts
-        checkTextContrast(randomColor, hextText);        
+        checkTextContrast(randomColor, hextText);
 
         // initial colorize sliders
         const color = chroma(randomColor);
@@ -40,6 +40,9 @@ function randomColors() {
         const saturation = sliders[2];
         colorizeSliders(color, hue, brightness, saturation);
     });
+
+    // reset input values
+    resetInputs();
 }
 
 function checkTextContrast(color, text) {
@@ -72,7 +75,7 @@ function hslControls(e) {
         e.target.getAttribute('data-hue') ||
         e.target.getAttribute('data-sat') ||
         e.target.getAttribute('data-bright');
-    
+
     // select current slider
     const currentSlider = e.target.parentElement.querySelectorAll('.sliders input');
     const hue = currentSlider[0];
@@ -85,14 +88,14 @@ function hslControls(e) {
         .set('hsl.h', hue.value)
         .set('hsl.s', saturation.value)
         .set('hsl.l', brightness.value);
-    
+
     colorDivs[index].style.backgroundColor = color;
 
     // colorize inputs/sliders
-    colorizeSliders(color, hue, saturation, brightness);    
+    colorizeSliders(color, hue, saturation, brightness);
 }
 
-function updateTextUI(index){
+function updateTextUI(index) {
     const activeDiv = colorDivs[index];
     const color = chroma(activeDiv.style.backgroundColor);
     const text = activeDiv.querySelector('h2');
@@ -100,9 +103,32 @@ function updateTextUI(index){
 
     // check contrast of the text and icons
     checkTextContrast(color, text);
-    for(icon of icons){
+    for (icon of icons) {
         checkTextContrast(color, icon);
     }
+}
+
+function resetInputs(){
+    const sliders = document.querySelectorAll('.sliders input');
+    sliders.forEach(slider =>{
+        if(slider.name === 'hue'){
+            const hueColor = initialColors[slider.getAttribute('data-hue')];
+            const hueValue = chroma(hueColor).hsl()[0];
+            slider.value = Math.floor(hueValue);
+        }
+
+        if(slider.name === 'saturation'){
+            const satColor = initialColors[slider.getAttribute('data-sat')];
+            const satValue = chroma(satColor).hsl()[1];
+            slider.value = Math.floor(satValue * 100) / 100;
+        }
+
+        if(slider.name === 'brightness'){
+            const brightColor = initialColors[slider.getAttribute('data-bright')];
+            const brightValue = chroma(birhtColor).hsl()[2];
+            slider.value = Math.floor(brightValue * 100) / 100;
+        }
+    });
 }
 
 randomColors();
