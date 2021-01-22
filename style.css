@@ -1,0 +1,136 @@
+/* ===== general styling ===== */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+i,
+svg,
+path {
+    pointer-events: none;
+}
+
+body {
+    font-family: 'Muli', sans-serif;
+    color: rgb(51, 51, 51);
+}
+
+button {
+    font-family: inherit;
+}
+
+.colors {
+    display: flex;
+    height: 80vh;
+    background-color: #fff;
+}
+
+/* ===== each color section =====*/
+
+.color {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.color h2 {
+    cursor: pointer;
+    font-size: 2rem;
+    color: #fff;
+}
+
+.color h2:active,
+.adjust:active,
+.lock:active,
+.sliders button:active,
+.panels button:active {
+    transform: scale(.95);
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+}
+
+.adjust,
+.lock {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 2rem;
+    margin: 2rem 0;
+    background: none;
+}
+
+.sliders {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    bottom: 0%;
+    width: 80%;
+    background: rgb(97, 55, 55);
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    padding: 1rem;
+    /* pointer-events: none;
+    opacity: 0;
+    transform: translateY(100px); */
+    transition: all .5s ease-in-out;
+}
+
+.sliders.active {
+    pointer-events: all;
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.sliders button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: .5rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: rgb(73, 73, 73);
+    color: #fff;
+    font-weight: bold;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+
+/* ===== panels section ===== */
+.panels{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 20vh;
+    text-align: center;
+}
+
+.panels button{
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: #fff;
+    background-color: rgb(31, 33, 63);    
+    padding: 1rem 2rem;
+    margin: 1rem;
+    border-radius: 1rem;
+    transition: all .3s ease-in-out;
+}
+
+.panels button:hover{
+    background-color: rgb(14, 16, 36);
+}
+
+.panels p,
+.panels button{
+    font-size: 1.2rem;
+}
