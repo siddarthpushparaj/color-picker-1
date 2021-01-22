@@ -42,6 +42,7 @@ button {
     cursor: pointer;
     font-size: 2rem;
     color: #fff;
+    font-family: 'Muli', sans-serif;
 }
 
 .color h2:active,
@@ -73,7 +74,7 @@ button {
     flex-direction: column;
     bottom: 0%;
     width: 80%;
-    background: rgb(97, 55, 55);
+    background: #fff;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
     padding: 1rem;
@@ -103,6 +104,17 @@ button {
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
     border-bottom-left-radius: 1rem;
+}
+
+.sliders input{
+    -webkit-appearance: none;
+    width: 100%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 1rem;
+    margin: 1rem 0;
+    position: relative;
 }
 
 /* ===== panels section ===== */
