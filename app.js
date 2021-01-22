@@ -55,6 +55,7 @@ lockBtns.forEach((btn, index) => {
 // Functions
 function randomColors() {
     initialColors = [];
+
     colorDivs.forEach(div => {
         const hextText = div.children[0];
         const randomColor = chroma.random();
@@ -124,7 +125,7 @@ function hslControls(e) {
         e.target.getAttribute('data-sat') ||
         e.target.getAttribute('data-bright');
 
-    // select current slider
+    // select current sliders
     const currentSlider = e.target.parentElement.querySelectorAll('.sliders input');
     const hue = currentSlider[0];
     const brightness = currentSlider[1];
@@ -206,7 +207,7 @@ function closeAdjustmentPanel(index) {
 function lockLayer(e, index) {
     const lockSVG = e.target.children[0];
     const activeDiv = colorDivs[index];
-    activeDiv.classList.add('locked');
+    activeDiv.classList.toggle('locked');
 
     if (lockSVG.classList.contains('fa-lock-open')) {
         e.target.innerHTML = `<i class="fas fa-lock"></i>`;
@@ -214,5 +215,50 @@ function lockLayer(e, index) {
         e.target.innerHTML = `<i class="fas fa-lock-open"></i>`;
     }
 }
+
+// ============= LIBRARY and LOCAL STORAGE STUFF ============= //
+
+// Selectors and Variables
+const saveContainer = document.querySelector('.save-container'); // palette-save popup container
+const closeSaveBtn = saveContainer.querySelector('.close-save');
+const saveInput = saveContainer.querySelector('.save-name');
+const submitSave = saveContainer.querySelector('.submit-save');
+const libraryContainer = document.querySelector('.library-container');
+const libraryCloseBtn = document.querySelector('.close-library');
+const libraryBtn = document.querySelector('.library'); // library btn in the panel section
+const saveBtn = document.querySelector('.save'); // save btn in the panel section
+let savedPalettes = [];
+
+// Event Listeners
+saveBtn.addEventListener('click', () => {
+    openClose(saveContainer, 'open')
+});
+closeSaveBtn.addEventListener('click', () => {
+    openClose(saveContainer, 'close')
+});
+//submitSave.addEventListener('click', savePalette);
+libraryBtn.addEventListener('click', () => {
+    openClose(libraryContainer, 'open')
+});
+libraryCloseBtn.addEventListener('click', () => {
+    openClose(libraryContainer, 'close');
+});
+
+
+// Functions
+function openClose(container, action) {
+    const popup = container.children[0];
+
+    if (action === 'open') {
+        container.classList.add('active');
+        popup.classList.add('active');
+    }
+
+    if (action === 'close') {
+        container.classList.remove('active');
+        popup.classList.remove('active');
+    }
+}
+
 
 randomColors();
