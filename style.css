@@ -106,7 +106,7 @@ button {
     border-bottom-left-radius: 1rem;
 }
 
-.sliders input{
+.sliders input {
     -webkit-appearance: none;
     width: 100%;
     border: none;
@@ -118,7 +118,7 @@ button {
 }
 
 /* ===== panels section ===== */
-.panels{
+.panels {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -126,23 +126,67 @@ button {
     text-align: center;
 }
 
-.panels button{
+.panels button {
     border: none;
     outline: none;
     cursor: pointer;
     color: #fff;
-    background-color: rgb(31, 33, 63);    
+    background-color: rgb(31, 33, 63);
     padding: 1rem 2rem;
     margin: 1rem;
     border-radius: 1rem;
     transition: all .3s ease-in-out;
 }
 
-.panels button:hover{
+.panels button:hover {
     background-color: rgb(14, 16, 36);
 }
 
 .panels p,
-.panels button{
+.panels button {
     font-size: 1.2rem;
+}
+
+/* ===== popup messages ===== */
+
+.copy-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: all .7s ease-in-out;
+}
+
+.copy-container.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.copy-popup {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 40vh;
+    width: 35%;
+    border-radius: 2rem;
+    transform: translateY(-2rem);
+    transition: all .6s ease-in-out;
+}
+
+.copy-popup.active {
+    transform: translateY(0);
+}
+
+.copy-popup h4 {
+    font-size: 2rem;
+    padding: 2rem;
 }

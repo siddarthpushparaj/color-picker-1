@@ -2,6 +2,7 @@
 const colorDivs = document.querySelectorAll('.color');
 const currentHexes = document.querySelectorAll('.color h2');
 const sliders = document.querySelectorAll('input[type="range"]');
+const copyContainer = document.querySelector('.copy-container');
 let initialColors = [];
 
 // Event Listeners
@@ -14,6 +15,18 @@ colorDivs.forEach((div, index) => {
         updateTextUI(index);
     });
 });
+
+currentHexes.forEach(hex => {
+    hex.addEventListener('click', () => {
+        copytoClipboard(hex);
+    });
+});
+
+copyContainer.addEventListener('transitionend', () => {
+    const copyPopup = copyContainer.children[0];
+    copyPopup.classList.remove('active');
+    copyContainer.classList.remove('active');
+})
 
 // Functions
 function randomColors() {
@@ -108,27 +121,41 @@ function updateTextUI(index) {
     }
 }
 
-function resetInputs(){
+function resetInputs() {
     const sliders = document.querySelectorAll('.sliders input');
-    sliders.forEach(slider =>{
-        if(slider.name === 'hue'){
+    sliders.forEach(slider => {
+        if (slider.name === 'hue') {
             const hueColor = initialColors[slider.getAttribute('data-hue')];
             const hueValue = chroma(hueColor).hsl()[0];
             slider.value = Math.floor(hueValue);
         }
 
-        if(slider.name === 'saturation'){
+        if (slider.name === 'saturation') {
             const satColor = initialColors[slider.getAttribute('data-sat')];
             const satValue = chroma(satColor).hsl()[1];
             slider.value = Math.floor(satValue * 100) / 100;
         }
 
-        if(slider.name === 'brightness'){
+        if (slider.name === 'brightness') {
             const brightColor = initialColors[slider.getAttribute('data-bright')];
-            const brightValue = chroma(birhtColor).hsl()[2];
+            const brightValue = chroma(brightColor).hsl()[2];
             slider.value = Math.floor(brightValue * 100) / 100;
         }
     });
+}
+
+function copytoClipboard(hex) {
+    const el = document.createElement('textarea');
+    el.value = hex.innerText;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+
+    // popup animation
+    const copyPopup = copyContainer.children[0];
+    copyContainer.classList.add('active');
+    copyPopup.classList.add('active');
 }
 
 randomColors();
