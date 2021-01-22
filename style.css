@@ -78,9 +78,9 @@ button {
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
     padding: 1rem;
-    /* pointer-events: none;
+    pointer-events: none;
     opacity: 0;
-    transform: translateY(100px); */
+    transform: translateY(100px);
     transition: all .5s ease-in-out;
 }
 

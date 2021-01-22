@@ -3,9 +3,15 @@ const colorDivs = document.querySelectorAll('.color');
 const currentHexes = document.querySelectorAll('.color h2');
 const sliders = document.querySelectorAll('input[type="range"]');
 const copyContainer = document.querySelector('.copy-container');
-let initialColors = [];
+const adjustBtns = document.querySelectorAll('.adjust');
+const closeAdjustments = document.querySelectorAll('.close-adjustment');
+const lockBtns = document.querySelectorAll('.lock');
+const generateBtn = document.querySelector('.generate');
+let initialColors;
 
 // Event Listeners
+generateBtn.addEventListener('click', randomColors);
+
 sliders.forEach(slider => {
     slider.addEventListener('input', hslControls);
 });
@@ -26,7 +32,25 @@ copyContainer.addEventListener('transitionend', () => {
     const copyPopup = copyContainer.children[0];
     copyPopup.classList.remove('active');
     copyContainer.classList.remove('active');
-})
+});
+
+adjustBtns.forEach((btn, index) => {
+    btn.addEventListener('click', () => {
+        openAdjustmentPanel(index);
+    });
+});
+
+closeAdjustments.forEach((btn, index) => {
+    btn.addEventListener('click', () => {
+        closeAdjustmentPanel(index);
+    });
+});
+
+lockBtns.forEach((btn, index) => {
+    btn.addEventListener('click', (e) => {
+        lockLayer(e, index);
+    });
+});
 
 // Functions
 function randomColors() {
@@ -35,8 +59,13 @@ function randomColors() {
         const hextText = div.children[0];
         const randomColor = chroma.random();
 
-        // add random color to an array
-        initialColors.push(randomColor.hex());
+        // add randomColor to an array
+        if (div.classList.contains('locked')) {
+            initialColors.push(hextText.innerText);
+            return;
+        } else {
+            initialColors.push(randomColor.hex());
+        }
 
         // add randomColor to background
         hextText.innerText = randomColor.hex();
@@ -56,6 +85,12 @@ function randomColors() {
 
     // reset input values
     resetInputs();
+
+    // check contrast of icons
+    adjustBtns.forEach((btn, index) => {
+        checkTextContrast(initialColors[index], btn);
+        checkTextContrast(initialColors[index], lockBtns[index]);
+    });
 }
 
 function checkTextContrast(color, text) {
@@ -156,6 +191,28 @@ function copytoClipboard(hex) {
     const copyPopup = copyContainer.children[0];
     copyContainer.classList.add('active');
     copyPopup.classList.add('active');
+}
+
+function openAdjustmentPanel(index) {
+    const currentSlider = colorDivs[index].querySelector('.sliders');
+    currentSlider.classList.add('active');
+}
+
+function closeAdjustmentPanel(index) {
+    const currentSlider = colorDivs[index].querySelector('.sliders');
+    currentSlider.classList.remove('active');
+}
+
+function lockLayer(e, index) {
+    const lockSVG = e.target.children[0];
+    const activeDiv = colorDivs[index];
+    activeDiv.classList.add('locked');
+
+    if (lockSVG.classList.contains('fa-lock-open')) {
+        e.target.innerHTML = `<i class="fas fa-lock"></i>`;
+    } else {
+        e.target.innerHTML = `<i class="fas fa-lock-open"></i>`;
+    }
 }
 
 randomColors();
