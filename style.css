@@ -52,7 +52,8 @@ button {
 .panels button:active,
 .close-save:active,
 .submit-save:active,
-.close-library:active {
+.close-library:active,
+.palette-btn:active {
     transform: scale(.95);
 }
 
@@ -132,7 +133,8 @@ button {
 }
 
 .panels button,
-.submit-save {
+.submit-save,
+.palette-btn {
     border: none;
     outline: none;
     cursor: pointer;
@@ -145,12 +147,14 @@ button {
 }
 
 .panels button:hover,
-.submit-save:hover {
+.submit-save:hover,
+.palette-btn:hover {
     background-color: rgb(14, 16, 36);
 }
 
 .panels p,
-.panels button {
+.panels button,
+.palette-btn {
     font-size: 1.2rem;
 }
 
@@ -217,4 +221,53 @@ button {
     padding: .5rem;
     font-size: 1.5rem;
     cursor: pointer;
+}
+
+/* ===== library ui ===== */
+
+.library-popup {
+    min-width: 50%;
+    max-height: 50vh;
+    overflow-y: scroll;
+    justify-content: flex-start;
+}
+
+.custom-palette {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    padding: 2rem;
+}
+
+.small-preview {
+    display: flex;
+}
+
+.small-preview div {
+    height: 5rem;
+}
+
+.custom-palette h4,
+.small-preview,
+.small-preview div {
+    flex: 1;
+}
+
+.small-preview div:nth-of-type(1) {
+    border-top-left-radius: .5rem;
+    border-bottom-left-radius: .5rem;
+}
+
+.small-preview div:nth-of-type(5) {
+    border-top-right-radius: .5rem;
+    border-bottom-right-radius: .5rem;
+}
+
+.palette-btn {
+    height: 5rem;
+    width: 5rem;
+    text-align: center;
+    padding: 0;
+    border-radius: .5rem;
 }
