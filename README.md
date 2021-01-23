@@ -1,4 +1,4 @@
-# olor-picker
+# color-picker
 a color generator web app built on Vanilla JavaScript. 
 
 ### functionalities:
