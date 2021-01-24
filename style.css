@@ -271,3 +271,89 @@ button {
     padding: 0;
     border-radius: .5rem;
 }
+
+/* ===== mobile view ===== */
+@media (max-width: 685px) {
+
+    .color:nth-last-child(4),
+    .color:nth-last-child(5) {
+        display: none;
+    }
+
+    .sliders {
+        width: 100%;
+    }
+
+    .copy-popup,
+    .save-popup,
+    .library-popup {
+        width: 75%;
+    }
+
+    .copy-popup h4,
+    .library-popup h4 {
+        font-size: 1.5rem;
+        padding: 1.5rem;
+        text-align: center;
+    }
+
+    .custom-palette h4 {
+        font-size: 1.5rem;
+    }
+
+    .small-preview div {
+        height: 3rem;
+    }
+
+    .custom-palette h4,
+    .small-preview,
+    .small-preview div {
+        flex: 3;
+    }
+
+    .palette-btn {
+        height: 3rem;
+        width: 4rem;
+        font-size: 1.2rem;
+    }
+}
+
+@media(max-width: 480px) {
+
+    .color h2,
+    .adjust,
+    .lock {
+        font-size: 1.7rem;
+    }
+
+    .custom-palette h4,
+    .small-preview,
+    .small-preview div {
+        flex: 6;
+    }
+
+    .save-name {        
+        font-size: 1rem;        
+    }
+
+    .copy-popup h4,
+    .library-popup h4 {
+        font-size: 1.3rem;
+        padding: 1.3rem;
+        text-align: center;
+    }
+
+    .custom-palette h4 {
+        font-size: 1.3rem;
+    }
+
+    .small-preview div {
+        height: 3rem;
+    }
+
+    .palette-btn {
+        height: 3rem;
+        width: 2rem;
+        font-size: .6rem;
+    }
+}
