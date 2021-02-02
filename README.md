@@ -1,5 +1,5 @@
 # color-picker
-a color generator web app built on Vanilla JavaScript. 
+a color generator web app built on JavaScript (with chroma.js library). 
 
 ### functionalities:
 - generating new colors
